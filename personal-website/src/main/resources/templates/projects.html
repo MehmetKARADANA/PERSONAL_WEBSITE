@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Projelerim</title></head>
+<body>
+<h1>Projeler</h1>
+<ul>
+    <li th:each="project : ${projects}">
+        <b th:text="${project.title}">Proje Başlığı</b><br/>
+        <span th:text="${project.description}">Açıklama</span>
+    </li>
+</ul>
+</body>
+</html>

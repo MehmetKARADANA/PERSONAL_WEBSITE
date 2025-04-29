@@ -1,31 +1,29 @@
 package com.karadana.personal.website.controller;
 
+import com.karadana.personal.website.model.ProjectRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 @Controller
 public class HomeController {
 
-    @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("name", "Mehmet Karadaş");
-        model.addAttribute("github", "https://github.com/kullaniciadi");
-        return "home";
-    }
+    @Autowired
+    private ProjectRepository projectRepository;
 
-    @GetMapping("/about")
-    public String about() {
-        return "about";
+    @GetMapping("/")
+    public String home() {
+        return "index";
     }
 
     @GetMapping("/projects")
     public String projects(Model model) {
-        model.addAttribute("projects", java.util.List.of(
-                "NLP Sentiment Analyzer",
-                "Kotlin Android App",
-                "Java REST API Server"
-        ));
+        model.addAttribute("projects", projectRepository.findAll());
         return "projects";
+    }
+
+    @GetMapping("/contact")
+    public String contact() {
+        return "contact";
     }
 }
